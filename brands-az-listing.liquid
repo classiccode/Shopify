@@ -1,0 +1,48 @@
+
+<h1 class="sr-only">DESIGNERS</h1>
+<section>
+  <div class="container">
+    <div class="mb-50">
+      <div class="maxus-titlebox">
+        <div class="text-center">
+          <h2 class="maxus-titlebox__title h1 font-300 fz-60 brandlsit-page-title">DESIGNERS</h2>
+          <h3 class="maxus-titlebox__meta text-uppercase h5  "></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">    
+{% assign current = "" %}
+{% assign letterChangeNum = 0 %}
+{% assign letterChanged = false %}      
+{% for product_vendor in shop.vendors %}
+    {% if letterChangeNum == 7 or letterChangeNum == 14 or letterChangeNum == 21  %}
+       		</ul>
+       		<ul class="brandlist">
+    {% endif %}
+    {% if forloop.first %}
+       {% assign letterChangeNum = letterChangeNum | plus:1 %}
+       <ul class="brandlist">
+    {% endif %}
+	{% assign first_letter = product_vendor | strip_html | upcase | truncate: 1, '' %}
+    {% unless first_letter == current %}
+    <li class="vendor-letter">{{ first_letter }}</li>  
+    {% assign letterChangeNum = letterChangeNum | plus:1 %}
+    {% endunless %}
+
+    <li>{{ product_vendor | link_to_vendor  }}</li>
+    {% assign current = first_letter %}
+	{% if forloop.last %}
+    </ul>
+    {% endif %}
+{% endfor %}
+
+
+  
+
+  </div>
+</section>
+
